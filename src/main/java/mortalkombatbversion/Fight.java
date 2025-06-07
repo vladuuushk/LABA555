@@ -8,6 +8,7 @@ import components.Result;
 import components.Items;
 import Characters.Player;
 import Characters.ShaoKahn;
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -58,6 +59,7 @@ public class Fight {
      * </ul>
      */
     protected int[] quantityMovesKindPlayer = {0, 0, 0,0};
+    private JFrame GOFrame;
 
     /**
      * Функция, реализующая последствия действий текущего раунда
@@ -267,6 +269,31 @@ public class Fight {
 
         }
     }
+    
+    private void showGameOverDialog(JFrame GOFrame) {
+    JDialog gameOverDialog = new JDialog(GOFrame, "Game Over", true);
+    gameOverDialog.setSize(300, 150);
+    gameOverDialog.setLayout(new BorderLayout());
+    gameOverDialog.setLocationRelativeTo(GOFrame);
+
+    // Текст "Game Over"
+    JLabel gameOverLabel = new JLabel("Игра окончена! Вы проиграли.", SwingConstants.CENTER);
+    gameOverDialog.add(gameOverLabel, BorderLayout.CENTER);
+
+    // Кнопка "Выход"
+    JButton exitButton = new JButton("Выход");
+    exitButton.addActionListener(e -> {
+        gameOverDialog.dispose(); // Закрываем диалог
+        GOFrame.dispose();     // Закрываем основное окно
+        System.exit(0);          // Завершаем программу (опционально)
+    });
+
+    JPanel buttonPanel = new JPanel();
+    buttonPanel.add(exitButton);
+    gameOverDialog.add(buttonPanel, BorderLayout.SOUTH);
+
+    gameOverDialog.setVisible(true);
+}
 
     /**
      * Функция реализующая логику окончания раунда, если он не финальный
@@ -299,9 +326,9 @@ public class Fight {
         } else {
             winnerNameLabel.setText(enemy.getName() + " win");
             infoAboutWinnerDialog.setVisible(true);
-            if (player instanceof Player) {
-            ((Player) player).resetPoints(0); // Сбрасываем очки в 0
-        }
+            infoAboutWinnerDialog.dispose(); // Закрываем старое окно
+            showGameOverDialog(GOFrame);   // Показываем Game Over
+        
         }
 
         moveNumber = 1;

@@ -6,6 +6,7 @@ package mortalkombatbversion;
 
 import components.Items;
 import Characters.Player;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.*;
 import java.io.IOException;
@@ -13,8 +14,14 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 /**
