@@ -131,4 +131,8 @@ public class Player extends Fighter {
         return "You";
     }
 
+    public void resetPoints(int i) {
+        points = 0;
+    }
+
 }

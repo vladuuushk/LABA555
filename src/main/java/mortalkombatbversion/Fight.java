@@ -299,6 +299,9 @@ public class Fight {
         } else {
             winnerNameLabel.setText(enemy.getName() + " win");
             infoAboutWinnerDialog.setVisible(true);
+            if (player instanceof Player) {
+            ((Player) player).resetPoints(0); // Сбрасываем очки в 0
+        }
         }
 
         moveNumber = 1;
